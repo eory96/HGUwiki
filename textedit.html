@@ -2,10 +2,88 @@
 <html>
 <head>
 	<title>Text editor</title>
+	<script src="js/jquery.js"></script>
 	<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+	<style>
+		body{
+            margin:0px;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        ul li{
+			list-style: none;
+			font-size: 25px;
+        }
+        #header #nav{
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+        }
+        #nav {
+            overflow: hidden;
+            width: 100%;
+        }
+        #nav ul li{
+            width: 200px;
+            height: 100px;
+            margin-right: 20px;
+            float: left;
+            line-height: 50px;
+        }
+        #nav img{
+            margin-right: 50px;
+		}
+		#title{
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+			overflow: hidden;
+			text-align: center;
+		}
+		#content{
+            width: 80%;
+            margin: 0 auto;
+            border: 1px solid #cccccc;
+            overflow: hidden;
+		}
+		#content #btn, #content #richTextField{
+		
+			margin-left: 0 auto; 
+		}
+		#footer{
+            width: 80%;
+            border: 1px solid #cccccc;
+            margin: 0 auto;
+        }
+        #footer p{
+            margin-left: 30px;
+        }
+	</style>
+	<script>
+		var test=document.getElementById("richTextField").value;
+		console.log(test);
+	</script>
 </head>
 	<body onload="enableEditMode();">
-		<div>
+		<div id="header">
+			<div id="nav">
+            
+        	    <ul>
+            	    <li><img src="images/KakaoTalk_Photo_2018-08-05-23-40-10.png" alt="logo" width="100"></li>
+                	<li><a href="#">최근변경</a> </li>
+	                <li><a href="#">최근토론</a></li>
+    	            <li><a href="#">ABOUT US</a> </li>
+        	        <li><a href="#">MORE</a> </li>
+        		</ul>
+        	</div>
+        	<div id="title">
+            	<h1>문서작성</h1>
+        	</div>
+		</div>
+		<div id="content">
+		<div id="btn">
 			<button onclick="execCmd('bold');"><i class="fa fa-bold"></i></button>
 			<button onclick="execCmd('italic');"><i class="fa fa-italic"></i></button>
 			<button onclick="execCmd('underline');"><i class="fa fa-underline"></i></button>
@@ -25,8 +103,7 @@
 			<button onclick="execCmd('insertUnorderedList');"><i class="fa fa-list-ul"></i></button>
 			<button onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol"></i></button>
 			<button onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph"></i></button>
-			<br><br/>
-		
+			<br/>
 			<select onchange="execCommandWithArg('formatBlock',this.value);">
 				<option value="H1">H1</option>
 				<option value="H2">H2</option>
@@ -67,7 +144,19 @@
 
 
 		</div>
-		<iframe name="richTextField" style="width: 1000px; height: 500px;"></iframe>
+		<iframe id="richTextField" name="richTextField" style="width: 1000px; height: 500px;">hello</iframe>
+		</br>
+		<button type="submit">submit</button>
+		</div>
+		<div id="footer">
+				<p> 
+				 이 저작물은 CC BY-NC-SA 2.0 KR에 따라 이용할 수 있습니다. (단, 라이선스가 명시된 일부 문서 및 삽화 제외)<br/>
+				 기여하신 문서의 저작권은 각 기여자에게 있으며, 각 기여자는 기여하신 부분의 저작권을 갖습니다. <br/>
+				 
+				 나무위키는 백과사전이 아니며 검증되지 않았거나, 편향적이거나, 잘못된 서술이 있을 수 있습니다. <br/>
+				 나무위키는 위키위키입니다. 여러분이 직접 문서를 고칠 수 있으며, 다른 사람의 의견을 원할 경우 직접 토론을 발제할 수 있습니다.      
+			 </p>      
+		 </div>
 		<script type="text/javascript">
 
 			var showingSourceCode = false;
