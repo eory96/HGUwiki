@@ -17,6 +17,21 @@
             color: white;
         }
     </style>
+    <script>
+        function readTextFile(file) {
+            var file1 = "/Users/gimdaegyo/"+document.getElementById('search').content;
+            var rawFile = new XMLHttpRequest(); 
+            rawFile.open("GET", file1, false); 
+            rawFile.onreadystatechange = function () { 
+                if(rawFile.readyState === 4) { 
+                    if(rawFile.status === 200 || rawFile.status == 0) {
+                          var allText = rawFile.responseText; alert(allText); 
+                    } 
+                }
+            }; 
+            rawFile.send(null); 
+        }
+    </script>
 </head>
 <body>
      <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
@@ -49,8 +64,8 @@
                 </li>
               </ul>
               <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="readTextFile()">Search</button>
               </form>
             
                 
