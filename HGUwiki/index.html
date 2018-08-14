@@ -9,7 +9,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <title>HGUwiki</title>
-    <style type="text/css">
+    <style type="text/css">ㅇ
         .jumbotron{
             background-image: url('images/handong2.jpeg');
             background-size: cover;
@@ -19,13 +19,14 @@
     </style>
     <script>
         function readTextFile(file) {
-            var file1 = "/Users/gimdaegyo/"+document.getElementById('search').content;
+            var file = "/Users/gimdaegyo/"+document.getElementById('search').value+".txt";
             var rawFile = new XMLHttpRequest(); 
-            rawFile.open("GET", file1, false); 
+            rawFile.open("GET", file, false); 
             rawFile.onreadystatechange = function () { 
                 if(rawFile.readyState === 4) { 
                     if(rawFile.status === 200 || rawFile.status == 0) {
                           var allText = rawFile.responseText; alert(allText); 
+                          getElementById('contents').value=allText;
                     } 
                 }
             }; 
@@ -65,37 +66,13 @@
               </ul>
               <form class="form-inline">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="readTextFile()">Search</button>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="readTextFile(0)"><a href="content.html" target="_blank">Search</a></button>
               </form>
+              <!--여기 search 부분에 내용을 검색시 content부분으로 넘어갈수 있도록 해야하는 상황.-->
             
                 
             </div>
-            <ul class="nav navbar-nav pull-right">
-                    <li class="nav-item dropdown user-menu-parent">
-                        <a class="nav-link dropdown-toggle user-menu" href="#" title="Member Menu" data-toggle="dropdown" aria-haspopup="true">
-                        
-                            <span class="icon ion-person"></span>
-                        
-                        </a>
-    
-                        <div class="dropdown-menu user-dropdown right">
-                        
-                            <div class="dropdown-item user-info">
-                                <div class="user-info">
-                                    <div>Please login!</div>
-                                </div>
-                            </div>
-                        
-                            <a class="dropdown-item" href="#">내 문서 기여 목록</a>
-                            <a class="dropdown-item" href="#">내 토론 기여 목록</a>
-                        
-                            <div class="dropdown-divider"></div>
-                        
-                            <a class="dropdown-item" href="#">로그인</a>
-                        
-                        </div>
-                    </li>
-                </ul>
+            
           </nav>
           <hr>
     <div class="container">

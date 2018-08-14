@@ -6,87 +6,336 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/handong.css">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.js"></script>
     <title>Document</title>
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">한동위키</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-              
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="#">Disabled</a>
-                    </li>
-                </ul>
-                <form class="form-inline">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
+<script>
+        /*function readTextFile(file) {
+            var file = "file:///Users/gimdaegyo/Downloads/"+document.getElementById('search').value+".txt";
+            //var file="https://github.com/eory96/HGUwiki/blob/master/HGUwiki/test.txt";
+            console.log(file);
+            //document.getElementById('content').innerHTML =file;
+            var rawFile = new XMLHttpRequest(); ㅇ
+
+            
+            rawFile.open("GET", file,false);
+            
+            rawFile.onreadystatechange = function () { 
+                if(rawFile.readyState === 4) { 
+                    if(rawFile.status === 200 || rawFile.status == 0) {
+                          var allText = rawFile.responseText; 
+                          alert(allText); 
+                          document.getElementById('content').innerHTML =allText;
+                          console.log(allText);
+                    } 
+                }
+            }; 
+            rawFile.send(null); 
+        }*/
+        ///Users/gimdaegyo/HGUwiki/HGUwiki/김대교 (1).txt
+        function getMessage(){
+            document.getElementById('textedit').style.display="none";
+            document.getElementById('contents').style.display="inline";
+            //var file = "file:///Users/gimdaegyo/Desktop/GBC/HGUwiki/"+document.getElementById('search').value+".txt";
+            var file = "file:///Users/gimdaegyo/HGUwiki/HGUwiki/"+document.getElementById('search').value;//+".txt";
+            //이거써보고 싶으면 경로 알아서들 바꿔서 쓸수 있도록,,, 서버가 없는탓에,,,
+            var xmlhttp;
+            if (window.XMLHttpRequest){
+                xmlhttp=new XMLHttpRequest();
+            }else{
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            try {
+                xmlhttp.open("GET",file,true);
+                xmlhttp.onreadystatechange=function(){
+                if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    document.getElementById('content').innerHTML=xmlhttp.responseText;
+                    document.getElementById('title').innerHTML=document.getElementById('search').value;
+                    }
+                }
+            } catch (error) {
+                document.getElementById('content').innerHTML="찾으시는 자료가 존재하지 않습니다."
+                document.getElementById('title').innerHTML=document.getElementById('search').value;
+            }
+            
+            
             
                 
-            </div>
-            <ul class="nav navbar-nav pull-right">
-                <li class="nav-item dropdown user-menu-parent">
-                    <a class="nav-link dropdown-toggle user-menu" href="#" title="Member Menu" data-toggle="dropdown" aria-haspopup="true">
-                        
-                        <span class="icon ion-person"></span>
-                        
+            xmlhttp.send();
+        }
+        
+        //texteditor 부분을 위한 스크립트
+        var showingSourceCode = false;
+        var isInEditMode = true;
+
+        function enableEditMode(){
+            richTextField.document.designMode = 'On';
+        }
+
+        function execCmd(command) {
+            richTextField.document.execCommand(command, false, null);
+        }
+
+        function execCommandWithArg(command, arg){
+            richTextField.document.execCommand(command, false, arg);
+        }
+
+        function toggleSource(){
+            if(showingSourceCode){
+                richTextField.document.getElementsByTagName('body')[0].innerHTML = richTextField.document.getElementsByTagName('body')[0].textContent;
+                showingSourceCode = false;
+            }else{
+                richTextField.document.getElementsByTagName('body')[0].textContent = richTextField.document.getElementsByTagName('body')[0].innerHTML;
+                showingSourceCode = true;
+            }
+        }
+
+        function toggleEdit(){
+            if(isInEditMode){
+                richTextField.document.designMode = 'Off';
+                isInEditMode = false;
+            }else{
+                richTextField.document.designMode = 'On';
+                isInEditMode = true;
+            }
+        }
+        /*function download(i, name, type) {
+            var a = richTextField.document.getElementsByTagName('body')[i].innerHTML;
+            var file = new Blob([text], {type: type});
+            a.href = URL.createObjectURL(file);
+            a.download = name;
+        }*/
+
+        function create(i, name, type) {
+            name=document.getElementById('title1').value;
+            var string = richTextField.document.getElementsByTagName('body')[0].innerHTML;
+            var dlbtn = document.getElementById("save");
+            var file = new Blob([string], {type: type});
+            dlbtn.href = URL.createObjectURL(file);
+            dlbtn.download = name;
+            newFile();
+        }
+        //<button id="save" class="btn btn-primary" type="submit" onclick="download('0','save.txt','text/plain');">저장</button>
+
+        /*function save(){
+            console.log(richTextField.document.getElementsByTagName('body')[0].innerHTML); 
+        }*/
+        function editing(){
+            document.getElementById('textedit').style.display="inline";
+            document.getElementById('contents').style.display="none";
+
+            document.getElementById('title1').value=document.getElementById('title').innerHTML;
+            richTextField.document.getElementsByTagName('body')[0].innerHTML=document.getElementById('content').innerHTML;
+        };
+        function back(){
+            document.getElementById('textedit').style.display="none";
+            document.getElementById('contents').style.display="inline";
+            getMessage();
+        };
+
+        function newFile(){
+            //var file = "file:///Users/gimdaegyo/Desktop/GBC/HGUwiki/"+document.getElementById('search').value+".txt";
+            document.getElementById('textedit').style.display="none";
+            document.getElementById('contents').style.display="inline";
+            var file = "file:///Users/gimdaegyo/HGUwiki/HGUwiki/"+document.getElementById('search').value+".txt";
+            
+            //이거써보고 싶으면 경로 알아서들 바꿔서 쓸수 있도록,,, 서버가 없는탓에,,,
+            var xmlhttp;
+            if (window.XMLHttpRequest){
+                xmlhttp=new XMLHttpRequest();
+            }else{
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.open("GET",file,true);
+            xmlhttp.onreadystatechange=function(){
+                if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    document.getElementById('content').innerHTML=xmlhttp.responseText;
+                    document.getElementById('title').innerHTML=document.getElementById('title1').value;
+                    }
+                }
+                
+            xmlhttp.send();
+        } 
+        
+</script>
+
+
+</head>
+<body onload="enableEditMode();" >
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">한동위키</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+              
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
                     </a>
-    <!--여기같은경우에는 지울 예정입니다...-->
-                    <div class="dropdown-menu user-dropdown right">
-                        
-                        <div class="dropdown-item user-info">
-                            <div class="user-info">
-                                <div>Please login!</div>
-                         </div>
-                        </div>
-                        
-                        <a class="dropdown-item" href="#">내 문서 기여 목록</a>
-                        <a class="dropdown-item" href="#">내 토론 기여 목록</a>
-                        
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
                         <div class="dropdown-divider"></div>
-                        
-                        <a class="dropdown-item" href="#">로그인</a>
-                        
+                        <a class="dropdown-item" href="#">Something else here</a>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled" href="#">Disabled</a>
+                </li>
             </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="getMessage();">Search</button>
+            </form>
+        </div>
     </nav>
     <hr>
     <!--여기에다가는 이제 목록창이나 내용이 출력되는 페이지를 만들 계획임-->
     <div class="container">
+        <div id="contents" style="display: inline;">
         <div class="card">
-            <div class="card-header" style="background-color: #e3f2fd">
+            <div class="card-header" style="background-color: #e3f2fd" id="title">
                 content name
+                <!--수정 부분 하나 넣어야하고 그후에 저장하는 것도 만들어야하는 상황.-->
             </div>
-            <div class="card-body">
+            <div class="card-body" id="content">
                 content value
             </div>
+            <!--수정 부분 하나 넣어야하고 그후에 저장하는 것도 만들어야하는 상황.-->
+            <div style="display: none" id="secret">야호야호</div>
+        </div>
+        <br/>
+        <div class="nav justify-content-end" onclick="editing();">
+            <button class="btn btn-primary">수정</button>
+        </div>
         </div>
     </div>
+    
+    <div class="container">
+        <div  style="display:none" id="textedit" onload="enableEditMode();">
+        <div class="card">
+            <div class="card-header" style="background-color: #e3f2fd">
+                유의사항
+            </div>
+            <div class="card-body">
+                <blockquote class="blockquote mb-0">
+                    <ul>
+                        <li>타인을 비방하기 위한 목적으로 글을 쓰지 말아주세요</li>
+                        <li>머 이것저것</li>
+                        <li>카더라식 정보는 사양합니다.</li>
+                    </ul>
+                </blockquote>
+            </div>
+        </div>
+        <hr>
+
+        <div class="card">
+            <div class="card-header" style="background-color: #e3f2fd">
+                <button onclick="execCmd('bold');"><i class="fa fa-bold"></i></button>
+                <button onclick="execCmd('italic');"><i class="fa fa-italic"></i></button>
+                <button onclick="execCmd('underline');"><i class="fa fa-underline"></i></button>
+                <button onclick="execCmd('strikeThrough');"><i class="fa fa-strikethrough"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="execCmd('justifyLeft');"><i class="fa fa-align-left"></i></button>
+                <button onclick="execCmd('justifyCenter');"><i class="fa fa-align-center"></i></button>
+                <button onclick="execCmd('justifyRight');"><i class="fa fa-align-right"></i></button>
+                <button onclick="execCmd('justifyFull');"><i class="fa fa-align-justify"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="execCmd('cut');"><i class="fa fa-cut"></i></button>
+                <button onclick="execCmd('copy');"><i class="fa fa-copy"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="execCmd('indent');"><i class="fa fa-indent"></i></button>
+                <button onclick="execCmd('outdent');"><i class="fa fa-outdent"></i></button>
+                <button onclick="execCmd('insertUnorderedList');"><i class="fa fa-list-ul"></i></button>
+                <button onclick="execCmd('insertOrderedList');"><i class="fa fa-list-ol"></i></button>
+                <button onclick="execCmd('insertParagraph');"><i class="fa fa-paragraph"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="execCmd('subscript');"><i class="fa fa-subscript"></i></button>
+                <button onclick="execCmd('superscript');"><i class="fa fa-superscript"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <button onclick="execCmd('undo');"><i class="fa fa-undo"></i></button>
+                <button onclick="execCmd('redo');"><i class="fa fa-redo"></i></button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                    
+                <br/>
+                <i class="fas fa-heading"></i> : 
+                <select onchange="execCommandWithArg('formatBlock',this.value);">
+                    <option value="H1">H1</option>
+                    <option value="H2">H2</option>
+                    <option value="H3">H3</option>
+                    <option value="H4">H4</option>
+                    <option value="H5">H5</option>
+                    <option value="H6">H6</option>
+                </select>
+                &nbsp;&nbsp;
+                <i class="fas fa-font"></i> : 
+                <select onchange="execCommandWithArg('fontName',this.value);">
+                    <option value="Arial">Arial</option>
+                    <option value="Comic Sans MS">Comic Sans Ms</option>
+                    <option value="Courier">Courier</option>
+                    <option value="Georgia">Georgia</option>
+                    <option value="Tahoma">Tahoma</option>
+                    <option value="Verdana">Verdana</option>
+                </select><!--글자체 인데 이거는 넣을지 말지 고민좀 해봐야할듯-->
+                &nbsp;
+                <i class="fas fa-text-height"></i> : 
+                <select onchange="execCommandWithArg('fontSize',this.value);">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                </select><!--글자크기 조절하는 부분-->
+                &nbsp;
+                <i class="fas fa-pencil-alt"></i> : <input type="color"  onchange="execCommandWithArg('foreColor',this.value);"/>
+                &nbsp;
+                <i class="fas fa-highlighter"></i> : <input type="color"  onchange="execCommandWithArg('hiliteColor',this.value);"/>
+                &nbsp;&nbsp;
+                <button onclick="execCmd('insertHorizontalRule');">HR</button>
+                &nbsp;&nbsp;
+                <button onclick="execCommandWithArg('createLink',prompt('Enter a URL','https://'));"><i class="fas fa-link"></i></button>
+                <button onclick="execCmd('unlink');"><i class="fa fa-unlink"></i></button>
+                    <!--<button onclick="toggleSource();"><i class="fa fa-code"></i></button> 내가친 텍스트를 html형태로 전환-->
+                    <!--<button onclick="toggleEdit();">Toggle Edit</button> 이거 그냥 텍스트모 on/off기능-->
+        
+                    <!--<input type="file" class="form-control-file" id="exampleFormControlFile1">-->
+                <button onclick="execCommandWithArg('insertImage',prompt('Enter the image URL',''));"><i class="far fa-images"></i></button>
+                    <!--<button onclick="execCmd('selectAll')">Select All</button>전체선택 기능인데 쓸데 없을거 같아 일단 뺌-->
+            </div>
+
+            <div class="card-header" style="background-color: #e3f2fd">
+                제목 : 
+                <input type="text" name="title1" id="title1" size="80%">
+            </div>
+            <div class="card-body">
+                <iframe id="richTextField" name="richTextField" style="width: 100%; height: 500px;" src=""></iframe>
+                </br>
+                <div class="nav justify-content-end">
+
+                    <a href="javascript:void(0)" id="save"><button id="save" class="btn btn-primary" type="submit" onclick="create('0','save.txt','text/plain');">저장</button></a><!--일단 저장을 누르면 어딘가에 저장이 되야하는데 일단 서버나 그런게 없어서 내컴퓨터에 저장이된다.-->
+                    <!--<button id="save" class="btn btn-primary" type="submit" onclick="create('0','save.txt','text/plain');">저장</button>-->
+                    &nbsp;&nbsp;
+                    <button class="btn btn-primary" type="reset" id="cancle" onclick="back();">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>              
+    </div>
     <hr>
+
+
     <footer style="background-color: #e3f2fd; color: #ffffff">
         <div class="container">
             <br>
