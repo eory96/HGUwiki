@@ -35,10 +35,16 @@
         }*/
         ///Users/gimdaegyo/HGUwiki/HGUwiki/김대교 (1).txt
         function getMessage(){
+            var file = "file:///Users/gimdaegyo/HGUwiki/HGUwiki/"+document.getElementById('search').value;//+".txt";
+            
+    // getCmaFileView(this,'name');
+    // getCmaFileView('upFile','all');
+ 
             document.getElementById('textedit').style.display="none";
             document.getElementById('contents').style.display="inline";
             //var file = "file:///Users/gimdaegyo/Desktop/GBC/HGUwiki/"+document.getElementById('search').value+".txt";
-            var file = "file:///Users/gimdaegyo/HGUwiki/HGUwiki/"+document.getElementById('search').value;//+".txt";
+            
+            if(file)
             //이거써보고 싶으면 경로 알아서들 바꿔서 쓸수 있도록,,, 서버가 없는탓에,,,
             var xmlhttp;
             if (window.XMLHttpRequest){
@@ -113,9 +119,10 @@
             var string = richTextField.document.getElementsByTagName('body')[0].innerHTML;
             var dlbtn = document.getElementById("save");
             var file = new Blob([string], {type: type});
+            //var url = new URL("file:///Users/gimdaegyo/HGUwiki/");
             dlbtn.href = URL.createObjectURL(file);
             dlbtn.download = name;
-            newFile();
+            //newFile();
         }
         //<button id="save" class="btn btn-primary" type="submit" onclick="download('0','save.txt','text/plain');">저장</button>
 

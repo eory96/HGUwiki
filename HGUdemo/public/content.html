@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>richtexteditor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!--<script src="https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js"></script>-->
+    
+    <style>
+        .nav justify-content-end :nth-child(1){
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="index.html">한동위키</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+              
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Dropdown
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="join.html" id="joinmenu">회원가입</a>
+                    </li>
+                    
+                    </ul>
+                <div class="nav justify-content-end">
+                    <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                    <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
+                </div> 
+            </div>
+
+            
+          </nav>
+          <hr>
+
+    
+    <div class="container">
+        <div id="contents" style="display: inline;">
+        <div class="card">
+            <div class="card-header" style="background-color: #e3f2fd" id="title">content name</div>
+            <div class="card-body" id="content">
+                content value
+            </div>
+            <!--수정 부분 하나 넣어야하고 그후에 저장하는 것도 만들어야하는 상황.-->
+            <!--<div style="display: none" id="secret">야호야호</div>-->
+        </div>
+        <br/>
+        <div class="nav justify-content-end" id="fix">
+            <button class="btn btn-primary">수정</button>
+        </div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <footer style="background-color: #e3f2fd; color: #ffffff">
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-sm-2" style="text-align: center;">copyright <br>&copy; 2018 빛쟁이</div>
+                <div class="col-sm-4"><h5>대표자소개</h5><p>얘들아 우리 이거 완성할수 있겠지???ㅜㅜ</p></div>
+                <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
+                <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
+                    <div class="list-group">
+                        <a href="#">빛나라머리머리</a>
+                        <a href="#">불쾌지수가 너무 높아서</a>
+                        <a href="#">눈을감자 존맛</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+
+    <script>
+        var d = new Date();
+        var year = d.getFullYear().toString();
+        var month = (d.getMonth() + 1).toString();
+        var day = d.getDate().toString();
+        var hours = d.getHours().toString();
+        var min = d.getMinutes().toString();
+        var sec = d.getSeconds().toString();
+        var currentTime = year + month + day + hours + min + sec;
+        
+        
+        //document.write(name + " " + content);
+
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyB_jfkBeotBufyU_-0YAG8D-8BII_ndst4",
+          authDomain: "hgudemo.firebaseapp.com",
+          databaseURL: "https://hgudemo.firebaseio.com",
+          projectId: "hgudemo",
+          storageBucket: "hgudemo.appspot.com",
+          messagingSenderId: "464898447701"
+        };
+        firebase.initializeApp(config);
+        emailAuth = firebase.auth();
+        firebaseDatabase = firebase.database();
+
+        var presenceRef = firebaseDatabase.ref("disconnectmessage");
+        // Write a string when this client loses connection
+        presenceRef.onDisconnect().set("I disconnected!");
+
+        userSessionCheck();
+        $(document).ready(function () {
+            
+            searchResult();
+            
+            $(document).on('click','#search_btn',function(){
+                search_btnResult();
+            })
+
+            $(document).on('click','#fix', function(){
+                var seseionCheck = document.getElementById("loginmenu").textContent;
+
+                if (seseionCheck == "로그아웃") {
+                //저장하기
+                    //var title = document.getElementById('search').value;
+                    var temp = location.href.split("#");
+                    console.log(location.href);
+                    var data1=temp[1].split(":");
+                    var title = decodeURI(decodeURIComponent(data1[0]));
+
+                    location.href="textedit.html#" + title + ":" + "texteditmode";
+                } else {
+                    alert("로그인이 필요한 서비스 입니다.")
+                }
+
+            });
+
+            /*$(document).on('click','#cancle',function(){
+                 window.location.href="index.html";
+            });*/
+        });
+
+
+        function userSessionCheck() {
+        console.log("function userSessionCheck(){ 함수 작동");
+        //로그인이 되어있으면 - 유저가 있으면 user를 인자값으로 넘겨준다.
+        emailAuth.onAuthStateChanged(function (user) {
+          console.log("emailAuth.onAuthStateChanged(function(user) { 함수 작동 로그인이 되었는지 체크해주는 파베 함수")
+          if (user) {
+            //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+            firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+              //유저라는 부모 키 에
+              //alert("로그인 되어 있군요 : " + user.uid);
+              //alert(snapshot.val().name + "님 환영합니다");
+              document.getElementById("loginmenu").textContent = "로그아웃";
+              document.getElementById("loginmenu").href = "logout.html";
+              document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
+              //document.getElementById("write").href = "textedit.html"
+  
+  
+              document.getElementById("joinmenu").href = "#";
+  
+              name = snapshot.val().name;
+              loginUserKey = snapshot.key;
+              console.log("userSessionCheck부분: 현재 로그인한 유저의 key =  " + loginUserKey);
+              userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+              console.log("로그인 체크 함수 끝, snapshot.val() 함수를 userInfo 변수에 할당!");
+              return true
+            });
+  
+          } else {
+            return false
+          }
+        });
+      }
+    
+    function searchResult() {
+            console.log("땡스 리스트 함수안으로 들어왔습니다")
+
+            var dataRef = firebaseDatabase.ref('datas');
+            //조회
+            dataRef.on('child_added', on_data_list);
+    }
+
+        //땡스리스트 thanks 테이블의 thanks 키 들을 연속적으로 가져온다.
+        function on_data_list(data) {
+            console.log("on_data_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다");
+            //searchTitle = document.getElementById('search').value;
+            
+            var temp = location.href.split("#");
+            console.log(location.href);
+            var data1=temp[1].split(":");
+            var name1 = decodeURI(decodeURIComponent(data1[0]));
+            
+
+
+            console.log("name is "+decodeURI(decodeURIComponent(name1)));
+            var content = data1[1];
+
+            //글 게수만큼 반복된다.
+            //alert(loginUserKey);
+            //alert(data.val().userkey);
+            //헌재 로그인한 유저의 key와 감사리스트 객체의 user key가 일치하는 것 만 가져오기
+            if (name1 == data.val().title) {
+                var key = data.key;
+                var Data = data.val();
+                var comment = Data.comment;
+                var createtime = Data.createtime;
+                var title = Data.title;
+                
+                document.getElementById('content').innerHTML=comment;
+                document.getElementById('title').innerHTML=title;
+            }
+        }
+
+
+        function search_btnResult(){
+            var title = document.getElementById('search').value;
+            location.href="content.html#" + title + ":" + "search";
+            var dataRef = firebaseDatabase.ref('datas');
+            //조회
+            dataRef.on('child_added', on_data_list2);
+        }
+
+        function on_data_list2(data) {
+            console.log("on_data_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다");
+            searchTitle = document.getElementById('search').value;
+            
+
+            console.log("name is "+searchTitle);
+            //var content = data1[1];
+
+            //글 게수만큼 반복된다.
+            //alert(loginUserKey);
+            //alert(data.val().userkey);
+            //헌재 로그인한 유저의 key와 감사리스트 객체의 user key가 일치하는 것 만 가져오기
+            if (searchTitle == data.val().title) {
+                var key = data.key;
+                var Data = data.val();
+                var comment = Data.comment;
+                var createtime = Data.createtime;
+                var title = Data.title;
+                
+                document.getElementById('content').innerHTML=comment;
+                document.getElementById('title').innerHTML=title;
+            }
+        }
+    </script>
+</body>
+</html>

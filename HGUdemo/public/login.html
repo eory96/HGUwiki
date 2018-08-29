@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>login page</title>
+    
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="index.html">한동위키</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="join.html" id="joinmenu">회원가입</a>
+                </li>
+              </ul>
+              
+              <!--<form class="form-inline">-->
+              <div class="nav justify-content-end">
+                <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
+              </div>
+              <!--</form>-->
+              <!--여기 search 부분에 내용을 검색시 content부분으로 넘어갈수 있도록 해야하는 상황.-->
+            
+                
+            </div>
+            
+      </nav>
+      <hr>
+
+    <!--login 폼 시작-->
+    <div class="container">
+      <br>
+      <br>
+         <p class="text-center"><a href="index.html"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo.png?alt=media&token=d6cf0fd1-5cba-4e33-bd7f-ba31ff9fd42c" style="width: 300px; height: auto;"></a></p> 
+      <br>
+      <br>
+
+          <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <!--<label for="email">Email address:</label>-->
+                    <input type="email" class="form-control" id="email" placeholder="Email address">
+                </div>
+            </div>
+            
+            <div class="col-lg-3"></div>
+          </div>
+
+          <div class="row">
+              <div class="col-lg-3"></div>
+              <div class="col-lg-6">
+                  <div class="form-group">
+                      
+                     <input type="password" class="form-control" id="pwd" placeholder="password">
+                  </div>
+              </div>
+              
+              <div class="col-lg-3"></div>
+          </div>
+            
+
+          </div>
+          <p class="text-center"><button type="button" class="btn btn-primary login" style="width: 540px;">로그인</button></p>
+     
+    </div>
+    <!-- login 폼 끝 -->
+
+
+
+    <!--optional javascript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+  // Initialize Firebase
+        var firebaseEmailAuth; //파이어베이스 email 인증 모듈 전역변수
+        var firebaseDatabase; //파이어베이스 db 모듈 전역변수
+        var userInfo; //가입한 유저의 정보. object 타입
+        var config = {
+    apiKey: "AIzaSyB_jfkBeotBufyU_-0YAG8D-8BII_ndst4",
+    authDomain: "hgudemo.firebaseapp.com",
+    databaseURL: "https://hgudemo.firebaseio.com",
+    projectId: "hgudemo",
+    storageBucket: "hgudemo.appspot.com",
+    messagingSenderId: "464898447701"
+  };
+        firebase.initializeApp(config);
+        firebaseEmailAuth = firebase.auth(); //파이어베이스 인증 객체
+        firebaseDatabase = firebase.database(); //파이어베이스 데이터베이스 객체
+ 
+    
+ 
+    //제이쿼리를 사용한다.
+    $(document).ready(function(){
+      
+//search 부분 구현
+        
+      $(document).on('click','#search_btn',function(){
+          console.log("내용검색한 결과를 보여주자!!");
+          //document.getElementById("search_btn").href="textedit.html"
+          
+          searchResult();
+      });
+      //가입버튼 눌렀을 때
+      $(document).on('click','.login',function(){
+        
+        //제이쿼리 선택자와 val() 함수를 이용해서 이메일,비밀번호 값을 가져온다. 
+        var email = $('#email').val();
+        var password = $('#pwd').val();
+        alert("로그인 버튼 눌렸음" + email +":"+ password);
+    
+    
+    //파이어베이스 이메일 로그인 함수
+    firebaseEmailAuth.signInWithEmailAndPassword(email, password)
+   .then(function(firebaseUser) {
+ 
+       //성공하면 firebaseUser에 유저 정보 값이 담겨 넘어온다.
+       loginSuccess(firebaseUser);
+ 
+   })
+  .catch(function(error) {
+       // 실패했을 때 에러 처리
+       alert(error);
+       alert("로그인 실패");
+  });
+    
+      });
+    });
+    
+    //로그인 성공했을 때
+    function loginSuccess(firebaseUser){
+       alert("로그인 성공");
+ 
+    //로그인 성공한 유저 id 확인해 보기 - firebase database에 접근해서 데이터 조회 하는 함수
+   firebaseDatabase.ref("users/"+firebase.auth().currentUser.uid).once('value').then(function(snapshot){
+        alert(snapshot.val().name)
+    });
+ 
+    //메인 페이지로 이동
+    window.location.href = "index.html"
+    }
+
+  function searchResult() {
+        var title = document.getElementById('search').value;
+        location.href="content.html#" + title + ":" + "search";
+  }
+    </script>
+</body>
+</html>

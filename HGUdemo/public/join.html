@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>회원가입</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="#">한동위키</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="join.html" id="joinmenu">회원가입</a>
+                </li>
+                
+              </ul>
+              <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="readTextFile(0)"><a href="content.html" target="_blank">Search</a></button>
+              </form>
+              <!--여기 search 부분에 내용을 검색시 content부분으로 넘어갈수 있도록 해야하는 상황.-->
+            
+                
+            </div>
+            
+          </nav>
+    <hr>
+
+    <!--가입 폼 시작-->
+    <div class="container">
+        <br>
+        <br>
+           <p class="text-center"><a href="index.html"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo.png?alt=media&token=d6cf0fd1-5cba-4e33-bd7f-ba31ff9fd42c" style="width: 300px; height: auto;"></a></p> 
+        <br>
+        <br>
+          <div class="row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">이메일</label>
+                <input type="email" class="form-control" id="email">
+              </div>
+            </div>
+
+            <div class="col-lg-3"></div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">닉네임</label>
+                <input type="email" class="form-control" id="name">
+              </div>
+            </div>
+
+            <div class="col-lg-3"></div>
+          </div>
+         
+          <div class="row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">비밀번호</label>
+                <input type="password" class="form-control" id="pwd">
+              </div>
+            </div>
+
+            <div class="col-lg-3"></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-3"></div>
+
+            <div class="col-lg-6">
+              <div class="form-group">
+                <label for="email">비밀번호 확인</label>
+                <input type="password" class="form-control" id="pwd2">
+              </div>
+            </div>
+
+            <div class="col-lg-3"></div>
+          </div>
+         
+          <p class="text-center"><button type="button" class="btn btn-primary join" style="width: 540px;">가입하기</button></p>
+         
+    </div>
+    <!-- 가입 폼 끝 -->
+
+
+
+    <!--optional javascript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script>
+
+//냘짜 함수
+var d = new Date();
+var year = d.getFullYear().toString();
+var month = (d.getMonth() + 1).toString();
+var day = d.getDate().toString();
+var hours = d.getHours().toString();
+var min = d.getMinutes().toString();
+var sec = d.getSeconds().toString();
+var currentTime = year + month + day+ hours + min + sec;
+
+var emailAuth;
+var firebaseDatabase;
+var userInfo;
+var name;
+  // Initialize Firebase
+  var config = {
+          apiKey: "AIzaSyB_jfkBeotBufyU_-0YAG8D-8BII_ndst4",
+          authDomain: "hgudemo.firebaseapp.com",
+          databaseURL: "https://hgudemo.firebaseio.com",
+          projectId: "hgudemo",
+          storageBucket: "hgudemo.appspot.com",
+          messagingSenderId: "464898447701"
+        };
+  
+firebase.initializeApp(config);
+//이메일 인증 객체
+emailAuth = firebase.auth();
+firebaseDatabase=firebase.database();
+// You can retrieve services via the defaultApp variable...
+//var defaultStorage = defaultApp.storage();
+//var defaultDatabase = defaultApp.database();
+
+
+$(document).ready(function(){
+  
+  //가입버튼 눌렀을 때
+  $(document).on('click','.join',function(){
+    var email = $('#email').val();
+    var password = $('#pwd').val();
+    var comfirm_password=$('#pwd2').val();
+    name = $('#name').val();
+
+//이메일로 가입 버튼 눌렀을 때 작동되는 함수
+if(password==comfirm_password){
+emailAuth.createUserWithEmailAndPassword(email, password).then(function(user) {
+    //var user = emailAuth.currentUser;
+    userInfo = user;
+    console.log("userInfo/"+userInfo); //오브젝트 타입
+    console.log("userInfo.currentUser/"+userInfo.currentUser); //안됨
+    console.log("userInfo.uid/"+userInfo.uid); //vPArtCHqPpOeIOpidEfug0Kgq3v1
+    
+    //성공했을 때 작동되는 함수
+    logUser();
+    
+
+}, function(error) {
+    //에러가 발생했을 때 
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    alert(errorMessage);
+   
+});
+}
+else{
+  alert("비밀번호가 일치하지 않습니다!!")
+}
+//가입 성공했을 때 호출 되는 함수
+function logUser(){
+    var ref = firebaseDatabase.ref("users/"+userInfo.uid); //유저라는 부모 키 에
+    var obj = {
+        name: name,
+        createtime : currentTime
+    };
+
+    ref.set(obj); // 고유한 자식 키가 하나 생셩이 되면서 json 삽입
+    alert("가입성공");
+
+    //메인 페이지로 이동시키고 세션 저장시키기
+    window.location.href = "index.html"
+}
+
+
+
+  });
+});
+
+            
+            
+            
+            
+            
+            
+    </script>
+</body>
+</html>

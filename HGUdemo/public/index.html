@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>Hello, world!</title>
+  <style type="text/css">
+    .jumbotron{
+        background-image: url('https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/handong2.jpeg?alt=media&token=8c44f652-4c3e-4ffc-a9c5-a1c690bb3a2e');
+        background-size: cover;
+        text-shadow: black 0.2em 0.2em 0.2em;
+        color: white;
+    }
+  </style>
+  
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="index.html">한동위키</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+              
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </div>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link disabled" href="join.html" id="joinmenu">회원가입</a>
+                </li>
+              </ul>
+              
+              <!--<form class="form-inline">-->
+              <div class="nav justify-content-end">
+                <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
+              </div>
+              <!--</form>-->
+              <!--여기 search 부분에 내용을 검색시 content부분으로 넘어갈수 있도록 해야하는 상황.-->
+            
+                
+            </div>
+            
+          </nav>
+          <hr>
+
+
+    <div class="container">
+      <div id="index">
+        <div class="jumbotron">
+            <h1 class="text-center">한동위키를 소개합니다.</h1>
+            <p class="text-center">한동 위키는 모두가 함께 하는 사이트입니다.</p>
+            <!-- <p class="text-center"><a class="btn btn-primary btn-lg" href="#" role="button">강의 들으러가기</a></p> -->
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-sm-4">
+                <h4>한동위키의 특징</h4>
+                <p>이거?? 니들이 알아서 내용적으면 우왕굳!!</p>
+                <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal">자세히 알아보기</a></p>
+            </div>
+            <div class="col-sm-2">
+              <img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/KakaoTalk_Photo_2018-08-28-09-51-55.png?alt=media&token=05d559bd-3e87-43f4-ae87-92b64b73d100" alt="..." class="rounded mx-auto d-block" style="width: auto; height: 130px;">
+            </div>
+            <div class="col-sm-4">
+               
+                <h4>한동위키의 특징</h4>
+                <p>이거?? 니들이 알아서 내용적으면 우왕굳!!</p>
+                <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal">자세히 알아보기</a></p>
+              
+            </div>
+            <div class="col-sm-2">
+              <img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/KakaoTalk_Photo_2018-08-28-09-52-06.png?alt=media&token=7589a897-3e8c-48ac-8084-3d9aee4a5fff" alt="" class="rounded mx-auto d-block" style="width: auto; height: 130px;">
+          </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-sm-8">
+            <div class="card-header" style="background-color: #e3f2fd;">
+              메인 기능
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-sm-2">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/KakaoTalk_Photo_2018-08-28-09-52-06.png?alt=media&token=7589a897-3e8c-48ac-8084-3d9aee4a5fff" alt="" class="rounded mx-auto d-block" style="width: auto; height: 110px;">
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="col-sm-9">
+               
+                  <h5>글쓰기</h5>
+                  <p>이거?? 니들이 알아서 내용적으면 우왕굳!!</p>
+                  <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal" id="text_btn">글쓰러가기</a></p>
+                
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-sm-9">
+               
+                  <h5>My Page</h5>
+                  <p>내가 쓴글을 모아 보고 싶으신가요??</p>
+                  <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal" id="myPage_btn">My Page</a></p>
+                
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="col-sm-2">
+                  <img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/KakaoTalk_Photo_2018-08-28-09-52-06.png?alt=media&token=7589a897-3e8c-48ac-8084-3d9aee4a5fff" alt="" class="rounded mx-auto d-block" style="width: auto; height: 110px;">
+                </div>
+              </div>
+
+              <br>
+              <br>
+            </div>
+          </div>
+
+        <div class="col-sm-4">
+            <div class="card-header" style="background-color: #e3f2fd;">
+                공지 사항
+            </div>
+            <div class="card-body">
+                 글자 알아서 채워도!!!
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      <hr>
+    <footer style="background-color: #e3f2fd; color: #ffffff">
+      
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-sm-2" style="text-align: center;">copyright <br>&copy; 2018 빛쟁이</div>
+                <div class="col-sm-4"><h5>대표자소개</h5><p>얘들아 우리 이거 완성할수 있겠지???ㅜㅜ</p></div>
+                <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
+                <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
+                    <div class="list-group">
+                        <a href="#">빛나라머리머리</a>
+                        <a href="#">불쾌지수가 너무 높아서</a>
+                        <a href="#">눈을감자 존맛</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+  <!--optional javascript-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script>
+      //냘짜 함수
+      var d = new Date();
+      var year = d.getFullYear().toString();
+      var month = (d.getMonth() + 1).toString();
+      var day = d.getDate().toString();
+      var hours = d.getHours().toString();
+      var min = d.getMinutes().toString();
+      var sec = d.getSeconds().toString();
+      var currentTime = year + month + day + hours + min + sec;
+      
+      var searchTitle
+      var loginUserKey;
+      var emailAuth;
+      var firebaseDatabase;
+  
+      var name;
+      var userInfo;
+      var comment;
+  
+      var thankKey;
+  
+      // Initialize Firebase
+      var config = {
+          apiKey: "AIzaSyB_jfkBeotBufyU_-0YAG8D-8BII_ndst4",
+          authDomain: "hgudemo.firebaseapp.com",
+          databaseURL: "https://hgudemo.firebaseio.com",
+          projectId: "hgudemo",
+          storageBucket: "hgudemo.appspot.com",
+          messagingSenderId: "464898447701"
+        };
+      firebase.initializeApp(config);
+  
+  
+      emailAuth = firebase.auth();
+      firebaseDatabase = firebase.database();
+      //로그인 했는지  체크 함수
+      userSessionCheck();
+
+      $(document).ready(function () {
+ 
+        //메인화면 감사일기 쓰기버튼 눌렀을 때
+        $(document).on('click', '#text_btn', function () {
+   
+          //네비게이션 메뉴의 text값 가져오기 - 자바스크립트 dom 방식으로 가져왔다.
+          var seseionCheck = document.getElementById("loginmenu").textContent;
+
+          //내가 쓴글 가져오기 - jquery방식으로 가져왔다.
+          //comment = $('#comment').val();
+          if (seseionCheck == "로그아웃") {
+            //텍스트편집기로
+            console.log("텍스트 에디터로 간다.!!")
+            //document.getElementById("upload").href = "image.html";
+            location.href="textedit.html";
+          } else {
+            alert("로그인이 필요한 서비스 입니다.");
+          }
+        });
+
+        $(document).on('click','#search_btn',function(){
+          console.log("내용검색한 결과를 보여주자!!");
+          //document.getElementById("search_btn").href="textedit.html"
+          
+          searchResult();
+        });
+
+      });
+      console.log("userSessionCheck(); 함수 작동이 완료되었습니다");
+  
+      //유저가 로그인 했는지 안했는지 확인해주는 함수
+      function userSessionCheck() {
+        console.log("function userSessionCheck(){ 함수 작동");
+        //로그인이 되어있으면 - 유저가 있으면 user를 인자값으로 넘겨준다.
+        emailAuth.onAuthStateChanged(function (user) {
+          console.log("emailAuth.onAuthStateChanged(function(user) { 함수 작동 로그인이 되었는지 체크해주는 파베 함수")
+          if (user) {
+            //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+            firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+              //유저라는 부모 키 에
+              //alert("로그인 되어 있군요 : " + user.uid);
+              //alert(snapshot.val().name + "님 환영합니다");
+              document.getElementById("loginmenu").textContent = "로그아웃";
+              document.getElementById("loginmenu").href = "logout.html";
+              document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
+              //document.getElementById("write").href = "textedit.html"
+  
+  
+              document.getElementById("joinmenu").href = "#";
+  
+              name = snapshot.val().name;
+              loginUserKey = snapshot.key;
+              console.log("userSessionCheck부분: 현재 로그인한 유저의 key =  " + loginUserKey);
+              userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+              console.log("로그인 체크 함수 끝, snapshot.val() 함수를 userInfo 변수에 할당!");
+              return true
+            });
+  
+          } else {
+            return falsef
+          }
+        })
+      }
+      
+     
+        function searchResult() {
+            var title = document.getElementById('search').value;
+            location.href="content.html#" + title + ":" + "search";
+        }
+    </script>
+</body>
+</html>
