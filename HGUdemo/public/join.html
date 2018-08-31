@@ -10,20 +10,18 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="#">한동위키</a>
+        <a class="navbar-brand" href="index.html">한동위키</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
               
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
+                
+                <!--<li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item dropdown">
+                </li>-->
+                <!--<li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Dropdown
                   </a>
@@ -33,7 +31,7 @@
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                   </div>
-                </li>
+                </li>-->
                 <li class="nav-item">
                   <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
                 </li>
@@ -42,10 +40,11 @@
                 </li>
                 
               </ul>
-              <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="readTextFile(0)"><a href="content.html" target="_blank">Search</a></button>
-              </form>
+              
+              <div class="nav justify-content-end">
+                <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
+              </div>
               <!--여기 search 부분에 내용을 검색시 content부분으로 넘어갈수 있도록 해야하는 상황.-->
             
                 
@@ -119,6 +118,24 @@
     </div>
     <!-- 가입 폼 끝 -->
 
+    <footer style="background-color: #e3f2fd; color: #969696">
+      
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-sm-2" style="text-align: center;">copyright <br>&copy; 2018 빛쟁이</div>
+                <div class="col-sm-4"><h5>대표자소개</h5><p>얘들아 우리 이거 완성할수 있겠지???ㅜㅜ</p></div>
+                <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
+                <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
+                    <div class="list-group">
+                        <a href="#">Hisnet</a>
+                        <a href="#">Handong University</a>
+                        <!--<a href="#">눈을감자 존맛</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 
 
     <!--optional javascript-->
@@ -212,8 +229,18 @@ function logUser(){
 
 
   });
-});
+  $(document).on('click','#search_btn',function(){
+          console.log("내용검색한 결과를 보여주자!!");
+          //document.getElementById("search_btn").href="textedit.html"
+          
+          searchResult();
+      });
 
+});
+      function searchResult() {
+          var title = document.getElementById('search').value;
+          location.href="content.html#" + title + ":" + "search";
+      }
             
             
             

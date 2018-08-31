@@ -26,13 +26,11 @@
               
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
+                    
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <a class="nav-link" href="#" id="mypage"></a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <!--<li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown
                         </a>
@@ -42,7 +40,7 @@
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">Something else here</a>
                         </div>
-                    </li>
+                    </li>-->
                     <li class="nav-item">
                         <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
                     </li>
@@ -65,23 +63,23 @@
     <div class="container">
         <div id="contents" style="display: inline;">
         <div class="card">
-            <div class="card-header" style="background-color: #e3f2fd" id="title">content name</div>
+            <div class="card-header" style="background-color: #e3f2fd" id="title">검색결과가 없습니다.</div>
             <div class="card-body" id="content">
-                content value
+                아래의 수정 버튼을 눌러 정보의 첫번째 작성자가 되어 주세요!!
             </div>
             <!--수정 부분 하나 넣어야하고 그후에 저장하는 것도 만들어야하는 상황.-->
             <!--<div style="display: none" id="secret">야호야호</div>-->
         </div>
         <br/>
         <div class="nav justify-content-end" id="fix">
-            <button class="btn btn-primary">수정</button>
+            <button class="btn btn-primary" id="fix2">수정</button>
         </div>
         </div>
     </div>
     
     <hr>
 
-    <footer style="background-color: #e3f2fd; color: #ffffff">
+    <footer style="background-color: #e3f2fd; color: #969696">
         <div class="container">
             <br>
             <div class="row">
@@ -90,9 +88,8 @@
                 <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
                 <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
                     <div class="list-group">
-                        <a href="#">빛나라머리머리</a>
-                        <a href="#">불쾌지수가 너무 높아서</a>
-                        <a href="#">눈을감자 존맛</a>
+                        <a href="http://hisnet.handong.edu/" target="_blank">Hisnet</a>
+                        <a href="http://www.handong.edu/" target="_blank">Handong University</a>
                     </div>
                 </div>
             </div>
@@ -136,12 +133,23 @@
         presenceRef.onDisconnect().set("I disconnected!");
 
         userSessionCheck();
+        
         $(document).ready(function () {
-            
+            //var notitle = document.getElementById("title").innerHTML;
+            //console.log(notitle);
             searchResult();
             
+                /*if(notitle=="content name"){
+                document.getElementById("title").innerHTML = "검색 결과를 찾지 못했습니다."
+                document.getElementById("content").innerHTML = "검색 결과를 찾지 못했습니다. 정보의 첫번째 작성자가 되어주세요"
+                console.log(notitle);
+            }*/
+            
+
             $(document).on('click','#search_btn',function(){
                 search_btnResult();
+                console.log(document.getElementById("title").innerHTML);
+                
             })
 
             $(document).on('click','#fix', function(){
@@ -161,10 +169,9 @@
                 }
 
             });
-
-            /*$(document).on('click','#cancle',function(){
-                 window.location.href="index.html";
-            });*/
+            
+            
+            
         });
 
 
@@ -179,6 +186,8 @@
               //유저라는 부모 키 에
               //alert("로그인 되어 있군요 : " + user.uid);
               //alert(snapshot.val().name + "님 환영합니다");
+              document.getElementById("mypage").textContent = "마이페이지";
+              document.getElementById("mypage").href = "mypage.html";
               document.getElementById("loginmenu").textContent = "로그아웃";
               document.getElementById("loginmenu").href = "logout.html";
               document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
@@ -202,7 +211,7 @@
       }
     
     function searchResult() {
-            console.log("땡스 리스트 함수안으로 들어왔습니다")
+            //console.log("땡스 리스트 함수안으로 들어왔습니다")
 
             var dataRef = firebaseDatabase.ref('datas');
             //조회
@@ -213,15 +222,16 @@
         function on_data_list(data) {
             console.log("on_data_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다");
             //searchTitle = document.getElementById('search').value;
-            
+            //var notitle = document.getElementById("title").innerHTML;
+
             var temp = location.href.split("#");
-            console.log(location.href);
+            //console.log(location.href);
             var data1=temp[1].split(":");
             var name1 = decodeURI(decodeURIComponent(data1[0]));
             
 
 
-            console.log("name is "+decodeURI(decodeURIComponent(name1)));
+            //console.log("name is "+decodeURI(decodeURIComponent(name1)));
             var content = data1[1];
 
             //글 게수만큼 반복된다.
@@ -237,24 +247,39 @@
                 
                 document.getElementById('content').innerHTML=comment;
                 document.getElementById('title').innerHTML=title;
+
             }
+            /*else{
+                document.getElementById("title").innerHTML = "검색 결과를 찾지 못했습니다.";
+                console.log(document.getElementById("title").innerHTML);
+                document.getElementById("content").innerHTML = "검색 결과를 찾지 못했습니다. 정보의 첫번째 작성자가 되어주세요";
+                if(document.getElementById('title').innerHTML == "검색 결과를 찾지 못했습니다."){
+                    document.getElementById("fix2").textContent = "글쓰러가기";
+                    document.getElementById("fix2").href = "textedit.html";
+                }
+            }*/
         }
 
 
         function search_btnResult(){
+            //var notitle = document.getElementById("title").innerHTML;
+
             var title = document.getElementById('search').value;
+            location.reload();
             location.href="content.html#" + title + ":" + "search";
+            //location.reload();
+
             var dataRef = firebaseDatabase.ref('datas');
             //조회
             dataRef.on('child_added', on_data_list2);
         }
 
         function on_data_list2(data) {
-            console.log("on_data_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다");
+            //console.log("on_data_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다");
             searchTitle = document.getElementById('search').value;
             
 
-            console.log("name is "+searchTitle);
+            //console.log("name is "+searchTitle);
             //var content = data1[1];
 
             //글 게수만큼 반복된다.
@@ -270,7 +295,10 @@
                 
                 document.getElementById('content').innerHTML=comment;
                 document.getElementById('title').innerHTML=title;
+                document.getElementById('fix2').textContent="수정";
             }
+
+            
         }
     </script>
 </body>
