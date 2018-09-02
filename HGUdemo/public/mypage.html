@@ -1,0 +1,292 @@
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!--<script src="https://github.com/eligrey/FileSaver.js/blob/master/src/FileSaver.js"></script>-->
+    
+    <style>
+        .nav justify-content-end :nth-child(1){
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+        <a class="navbar-brand" href="index.html">한동위키</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+              
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="mypage"></a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="login.html" id="loginmenu">login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="join.html" id="joinmenu">회원가입</a>
+                    </li>
+                    
+                    </ul>
+                <div class="nav justify-content-end">
+                    <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                    <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
+                </div> 
+            </div>
+
+            
+          </nav>
+          <hr>
+
+    
+    <div class="container">
+        <h1>My Page</h1>
+        <br>
+        <div class="media">
+            
+            <div class="media-left">
+                <img id="myimage" src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo3.png?alt=media&token=00497b74-c63c-457a-a620-1b8c19e2d1b2" class="media-object" style="height:200px">
+        <!-- file -->        
+                <div id="showfile">
+                </div>
+
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="media-body">
+                
+                    <h4 class="media-heading" id="nicname"> 닉네임 </h4>
+                   
+                
+                
+        <!-- 상태메시지 -->   
+               
+        
+            </div>
+            <br>
+
+           
+        
+        </div>
+       <br>
+        <div class="nav justify-content-end">
+                
+        </div>
+        <hr>
+        <div class="container">
+
+                <h3>나의 글</h3>
+                <br>
+                <!-- 감사 리스트 붙일 곳 -->
+                <div class="datasList"></div>
+    
+        </div>
+    </div>
+    
+    <hr>
+
+    <footer style="background-color: #e3f2fd; color: #969696">
+        <div class="container">
+            <br>
+            <div class="row">
+                <div class="col-sm-2" style="text-align: center;">copyright <br>&copy; 2018 빛쟁이</div>
+                <div class="col-sm-4"><h5>대표자소개</h5><p>얘들아 우리 이거 완성할수 있겠지???ㅜㅜ</p></div>
+                <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
+                <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
+                    <div class="list-group">
+                        <a href="http://hisnet.handong.edu/" target="_blank">Hisnet</a>
+                        <a href="http://www.handong.edu/" target="_blank">Handong University</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+
+    <script>
+        //document.write(name + " " + content);
+        var firebaseEmailAuth; //파이어베이스 email 인증 모듈 전역변수
+        var firebaseDatabase; //파이어베이스 db 모듈 전역변수
+    
+    //var currentTime; // 현재 시간 가져오는 함수, time.js 파일에 따로 빼놓았다.
+        var d = new Date();
+        var year = d.getFullYear().toString();
+        var month = (d.getMonth() + 1).toString();
+        var day = d.getDate().toString();
+        var hours = d.getHours().toString();
+        var min = d.getMinutes().toString();
+        var sec = d.getSeconds().toString();
+        var currentTime = year + month + day+ hours + min + sec;
+        
+    
+
+        var name; //유저 이름
+        var loginUserKey; //로그인한 유저의 부모 key
+        var userInfo; //로그인한 유저의 정보 object type
+        var comment; //유저가 쓴글 내용 저장
+        var url; //사진이 저장될 url
+
+        // Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyB_jfkBeotBufyU_-0YAG8D-8BII_ndst4",
+          authDomain: "hgudemo.firebaseapp.com",
+          databaseURL: "https://hgudemo.firebaseio.com",
+          projectId: "hgudemo",
+          storageBucket: "hgudemo.appspot.com",
+          messagingSenderId: "464898447701"
+        };
+        firebase.initializeApp(config);
+        emailAuth = firebase.auth();
+        firebaseDatabase = firebase.database();
+
+        var presenceRef = firebaseDatabase.ref("disconnectmessage");
+        // Write a string when this client loses connection
+        presenceRef.onDisconnect().set("I disconnected!");
+
+        
+        
+        $(document).ready(function () {
+            
+            userSessionCheck();
+            setTimeout(function() {
+                myDataList();
+            }, 700);
+            
+            $(document).on('click', '#changeBtn', function () {
+                changeButtonAction();
+            });
+
+
+            $(document).on('click','#search_btn',function(){
+                search_btnResult();
+                console.log(document.getElementById("title").innerHTML);
+                
+            })
+
+            $(document).on('click','#fix', function(){
+                var seseionCheck = document.getElementById("loginmenu").textContent;
+
+                if (seseionCheck == "로그아웃") {
+                //저장하기
+                    //var title = document.getElementById('search').value;
+                    var temp = location.href.split("#");
+                    console.log(location.href);
+                    var data1=temp[1].split(":");
+                    var title = decodeURI(decodeURIComponent(data1[0]));
+
+                    location.href="textedit.html#" + title + ":" + "texteditmode";
+                } else {
+                    alert("로그인이 필요한 서비스 입니다.")
+                }
+
+            });
+            
+            
+            
+        });
+
+
+        function userSessionCheck() {
+        console.log("function userSessionCheck(){ 함수 작동");
+        //로그인이 되어있으면 - 유저가 있으면 user를 인자값으로 넘겨준다.
+        emailAuth.onAuthStateChanged(function (user) {
+          console.log("emailAuth.onAuthStateChanged(function(user) { 함수 작동 로그인이 되었는지 체크해주는 파베 함수")
+          if (user) {
+            //조회 - 데이터 베이스에 저장된 닉네임을 현재 접속되어 있는 user의 pk key 값을 이용해서 가져오기
+            firebaseDatabase.ref("users/" + user.uid).once('value').then(function (snapshot) {
+              //유저라는 부모 키 에
+              //alert("로그인 되어 있군요 : " + user.uid);
+              //alert(snapshot.val().name + "님 환영합니다");
+              document.getElementById("mypage").textContent = "마이페이지";
+              document.getElementById("mypage").href = "mypage.html";
+              document.getElementById("loginmenu").textContent = "로그아웃";
+              document.getElementById("loginmenu").href = "logout.html";
+              document.getElementById("joinmenu").textContent = "반가워요! " + snapshot.val().name + " 님";
+              document.getElementById("nicname").textContent = snapshot.val().name+" ("+snapshot.val().email+")";
+
+  
+  
+              document.getElementById("joinmenu").href = "#";
+  
+              name = snapshot.val().name;
+              loginUserKey = snapshot.key;
+              console.log("userSessionCheck부분: 현재 로그인한 유저의 key =  " + loginUserKey);
+              userInfo = snapshot.val(); //snapshot.val()에 user 테이블에 있는 해당 개체 정보가 넘어온다. userInfo에 대입!
+              console.log("로그인 체크 함수 끝, snapshot.val() 함수를 userInfo 변수에 할당!");
+              return true
+            });
+  
+          } else {
+            return false
+          }
+        });
+      }
+    
+    
+
+
+        function search_btnResult(){
+            //var notitle = document.getElementById("title").innerHTML;
+
+            var title = document.getElementById('search').value;
+            location.reload();
+            location.href="content.html#" + title + ":" + "search";
+        }
+        
+        function myDataList() {
+            console.log("땡스 리스트 함수안으로 들어왔습니다")
+ 
+            var thanksRef = firebaseDatabase.ref('datas');
+            //조회
+            thanksRef.on('child_added', on_data_list)
+        }
+
+        function on_data_list(data) {
+            console.log("on_thanks_list() 함수안으로 들어왔습니다 리스트를 가져오겠습니다")
+            //글 게수만큼 반복된다.
+            //alert(loginUserKey);
+            //alert(data.val().userkey);
+            //헌재 로그인한 유저의 key와 감사리스트 객체의 user key가 일치하는 것 만 가져오기
+            if (loginUserKey == data.val().userkey) {
+                var key = data.key;
+                var Data = data.val();
+                var dataComment = Data.comment;
+                var createtime = Data.createtime;
+                var title = Data.title;
+                var userkey = Data.userkey;
+                var name = Data.name;
+               
+ 
+                var mod_btn_key = key + "mod_btn"
+                content_html = "content.html#"+title+":"+"search";
+                //감사리스트 동적으로 붙이기
+                var html =
+                    "<div class=\"media\">" +
+                    "<div class=\"media-body\">" +
+                    "<h4 class=\"media-heading\">" + name +
+                    " <span STYLE=\"color: green; font-size: 5pt\">" + createtime + "</span></h4>" +
+                    "<div id='" + key + "'><a href='"+content_html+"'><p>" + title + "</p></a></div></div></div>"+
+                    "<hr>";
+ 
+ 
+                $(".datasList").append(html);
+            }
+        }
+
+    </script>
+</body>
+</html>

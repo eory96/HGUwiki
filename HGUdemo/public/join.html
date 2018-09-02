@@ -57,7 +57,7 @@
     <div class="container">
         <br>
         <br>
-           <p class="text-center"><a href="index.html"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo.png?alt=media&token=d6cf0fd1-5cba-4e33-bd7f-ba31ff9fd42c" style="width: 300px; height: auto;"></a></p> 
+           <p class="text-center"><a href="index.html"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo3.png?alt=media&token=00497b74-c63c-457a-a620-1b8c19e2d1b2" style="width: 300px; height: auto;"></a></p> 
         <br>
         <br>
           <div class="row">
@@ -185,38 +185,42 @@ $(document).ready(function(){
     var email = $('#email').val();
     var password = $('#pwd').val();
     var comfirm_password=$('#pwd2').val();
+    //var imageURL = "https://www.w3schools.com/bootstrap/img_avatar3.png";
     name = $('#name').val();
 
 //이메일로 가입 버튼 눌렀을 때 작동되는 함수
-if(password==comfirm_password){
-emailAuth.createUserWithEmailAndPassword(email, password).then(function(user) {
+  if(password==comfirm_password){
+    emailAuth.createUserWithEmailAndPassword(email, password).then(function(user) {
     //var user = emailAuth.currentUser;
     userInfo = user;
-    console.log("userInfo/"+userInfo); //오브젝트 타입
-    console.log("userInfo.currentUser/"+userInfo.currentUser); //안됨
-    console.log("userInfo.uid/"+userInfo.uid); //vPArtCHqPpOeIOpidEfug0Kgq3v1
+    //console.log("userInfo/"+userInfo); //오브젝트 타입
+    //console.log("userInfo.currentUser/"+userInfo.currentUser); //안됨
+    //console.log("userInfo.uid/"+userInfo.uid); //vPArtCHqPpOeIOpidEfug0Kgq3v1
     
     //성공했을 때 작동되는 함수
     logUser();
     
 
-}, function(error) {
+    }, function(error) {
     //에러가 발생했을 때 
-    var errorCode = error.code;
-    var errorMessage = error.message;
-    alert(errorMessage);
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      alert(errorMessage);
    
-});
-}
-else{
-  alert("비밀번호가 일치하지 않습니다!!")
-}
+    });
+  }
+  else{
+    alert("비밀번호가 일치하지 않습니다!!")
+  }
 //가입 성공했을 때 호출 되는 함수
-function logUser(){
+  function logUser(){
     var ref = firebaseDatabase.ref("users/"+userInfo.uid); //유저라는 부모 키 에
     var obj = {
         name: name,
-        createtime : currentTime
+        createtime : currentTime,
+        email: email,
+        userkey:userInfo.uid
+        //imageURL: imageURL
     };
 
     ref.set(obj); // 고유한 자식 키가 하나 생셩이 되면서 json 삽입
@@ -224,9 +228,7 @@ function logUser(){
 
     //메인 페이지로 이동시키고 세션 저장시키기
     window.location.href = "index.html"
-}
-
-
+  }
 
   });
   $(document).on('click','#search_btn',function(){
@@ -237,10 +239,12 @@ function logUser(){
       });
 
 });
-      function searchResult() {
-          var title = document.getElementById('search').value;
-          location.href="content.html#" + title + ":" + "search";
-      }
+      
+      
+function searchResult() {
+  var title = document.getElementById('search').value;
+  location.href="content.html#" + title + ":" + "search";
+}
             
             
             
