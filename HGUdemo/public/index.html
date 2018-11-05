@@ -203,7 +203,7 @@
         var title, writer;
         //var dataRef = firebaseDatabase.ref("datas/"+title);
         // console.log(dataRef);
-        dataRef.orderByChild("createtime").limitToFirst(queryCount).on("child_added", function(snapshot){
+        dataRef.orderByChild("compare").limitToFirst(queryCount).on("child_added", function(snapshot){
           // console.log(snapshot.key);
           title = snapshot.val().title;
           writer = snapshot.val().name;

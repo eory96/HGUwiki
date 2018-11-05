@@ -260,11 +260,11 @@
     <script>
         var d = new Date();
         var year = d.getFullYear().toString();
-        var month = (d.getMonth() + 1).toString();
-        var day = d.getDate().toString();
-        var hours = d.getHours().toString();
-        var min = d.getMinutes().toString();
-        var sec = d.getSeconds().toString();
+        var month = ("00" + (d.getMonth() + 1)).slice(-2);
+        var day = ("00" + d.getDate()).slice(-2);
+        var hours = ("00" + d.getHours()).slice(-2);
+        var min = ("00" + d.getMinutes()).slice(-2);
+        var sec = ("00" + d.getSeconds()).slice(-2);
 
         var year1 = d.getFullYear();
         var month1 = (d.getMonth() + 1);
@@ -275,6 +275,9 @@
 
         var currentTime = parseInt(year + month + day + hours + min + sec);
         var currentTime1 = year1+month1+day1+hours1+min1+sec1;
+
+        var compare = 1/currentTime;
+
     
         var loginUserKey;
 
@@ -382,7 +385,8 @@
         title: title,
         comment: string,
         createtime: currentTime,
-        comparetime: currentTime1
+        comparetime: currentTime1,
+        compare: compare
       };
       //위에서 thankRef.push()로 만들어진 key아래 위치에 저장해준다.
       dataRef.set(obj);
