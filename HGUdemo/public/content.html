@@ -111,7 +111,7 @@
         var hours = d.getHours().toString();
         var min = d.getMinutes().toString();
         var sec = d.getSeconds().toString();
-        var currentTime = year + month + day + hours + min + sec;
+        var currentTime = parseInt(year + month + day + hours + min + sec);
         
         
         //document.write(name + " " + content);
@@ -166,7 +166,8 @@
 
                     location.href="textedit.html#" + title + ":" + "texteditmode";
                 } else {
-                    alert("로그인이 필요한 서비스 입니다.")
+                    alert("로그인이 필요한 서비스 입니다.");
+                    location.href = "login.html"
                 }
 
             });
@@ -243,7 +244,7 @@
                 var key = data.key;
                 var Data = data.val();
                 var comment = Data.comment;
-                var createtime = Data.createtime;
+                var createtime = parseInt(Data.createtime);
                 var title = Data.title;
                 
                 document.getElementById('content').innerHTML=comment;
@@ -291,7 +292,7 @@
                 var key = data.key;
                 var Data = data.val();
                 var comment = Data.comment;
-                var createtime = Data.createtime;
+                var createtime = parseInt(Data.createtime);
                 var title = Data.title;
                 
                 document.getElementById('content').innerHTML=comment;

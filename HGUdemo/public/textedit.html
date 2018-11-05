@@ -273,7 +273,7 @@
         var min1 = d.getMinutes();
         var sec1 = d.getSeconds();
 
-        var currentTime = year + month + day + hours + min + sec;
+        var currentTime = parseInt(year + month + day + hours + min + sec);
         var currentTime1 = year1+month1+day1+hours1+min1+sec1;
     
         var loginUserKey;
@@ -386,7 +386,6 @@
       };
       //위에서 thankRef.push()로 만들어진 key아래 위치에 저장해준다.
       dataRef.set(obj);
-      
       alert("저장이 완료 되었습니다.");
 
       //$('#comment').val("");
@@ -412,7 +411,7 @@
                 var key = data.key;
                 var Data = data.val();
                 var comment = Data.comment;
-                var createtime = Data.createtime;
+                var createtime = parseInt(Data.createtime);
                 var title = Data.title;
                 
                 document.getElementById('title1').value=title;
