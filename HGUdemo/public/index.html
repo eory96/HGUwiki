@@ -19,7 +19,8 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="index.html">한동위키</a>
+        <a class="navbar-brand" href="index.html"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/logo3.png?alt=media&token=00497b74-c63c-457a-a620-1b8c19e2d1b2" alt="" style="height: 50px; width: auto;">&nbsp;한동위키</a>
+        
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -51,7 +52,7 @@
               
               <!--<form class="form-inline" onsubmit="searchResult();">-->
               <div class="nav justify-content-end">
-                <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search">
+                <input class="form-control col-sm-8" type="search" placeholder="Search" aria-label="Search" id="search" >
                 <button class="btn btn-outline-success col-sm-4" id="search_btn">Search</button>
               </div>
               <!--</form>-->
@@ -97,42 +98,17 @@
 
         <div class="row">
           <div class="col-sm-8">
-            <div class="card-header" style="background-color: #e3f2fd;">
+            <!--<div class="card-header" style="background-color: #e3f2fd;">
               메인 기능
-            </div>
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-2">
-                  <img src="" alt="" class="rounded mx-auto d-block" style="width: auto; height: 110px;">
-                </div>
-                &nbsp;&nbsp;&nbsp;
-                <div class="col-sm-9">
-               
-                  <h5>글쓰기</h5>
-                  <p>이거?? 니들이 알아서 내용적으면 우왕굳!!</p>
-                  <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal" id="text_btn">글쓰러가기</a></p>
-                
-                </div>
-              </div>
-              <br>
-              <div class="row">
-                <div class="col-sm-9">
-               
-                  <h5>My Page</h5>
-                  <p>내가 쓴글을 모아 보고 싶으신가요??</p>
-                  <p><a class="btn btn-primary" data-target="#modal" data-toggle="#modal" id="">My Page</a></p>
-                
-                </div>
-                &nbsp;&nbsp;&nbsp;
-                <div class="col-sm-2">
-                  
-                  <img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/KakaoTalk_Photo_2018-08-28-09-52-06.png?alt=media&token=7589a897-3e8c-48ac-8084-3d9aee4a5fff" alt="" class="rounded mx-auto d-block" style="width: auto; height: 110px;">
-                </div>
-              </div>
-
-              <br>
-              <br>
-            </div>
+            </div>-->
+            <!--<div class="card-body">-->
+                <div id="newest_board" class="list-group">
+                    <a href="#" class="list-group-item list-group-item-action" style="background-color: #e3f2fd;">
+                      최신글
+                    </a>
+    
+                  </div>
+           <!-- </div>-->
           </div>
 
         <div class="col-sm-4">
@@ -158,8 +134,11 @@
             <br>
             <div class="row">
                 <div class="col-sm-2" style="text-align: center;">copyright <br>&copy; 2018 빛쟁이</div>
-                <div class="col-sm-4"><h5>대표자소개</h5><p>얘들아 우리 이거 완성할수 있겠지???ㅜㅜ</p></div>
-                <div class="col-sm-4"><h5>Ghost</h5><p>흥해라 고스트 흥해라 우리집 흥해라 빛쟁이 흥해라 김대교 흥해라 강동인 흥해라 전영원 흥해라 이민재</p></div>
+                <!--<div class="col-sm-1"><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/copyright.png?alt=media&token=14511597-5396-473f-baef-f3d119e8781e"></div>-->
+                <div class="col-sm-8">
+                   <p><img src="https://firebasestorage.googleapis.com/v0/b/hgudemo.appspot.com/o/copyright.png?alt=media&token=14511597-5396-473f-baef-f3d119e8781e"></p>
+                  &nbsp;이 저작물은 CC BY-NC-SA 2.0 KR에 따라 이용할 수 있습니다. (단, 라이선스가 명시된 일부 문서 및 삽화 제외) <br>
+                    기여하신 문서의 저작권은 각 기여자에게 있으며,각 기여자는 기여하신 부분의 저작권을 갖습니다. </p></div>
                 <div class="col-sm-2"><h4 style="text-align: center;">관련 협회</h4>
                     <div class="list-group">
                         <a href="http://hisnet.handong.edu/" target="_blank">Hisnet</a>
@@ -218,8 +197,23 @@
       userSessionCheck();
 
       $(document).ready(function () {
+
+        var dataRef = firebaseDatabase.ref('datas');
+        var queryCount = 7;
+        var title, writer;
+        //var dataRef = firebaseDatabase.ref("datas/"+title);
+        // console.log(dataRef);
+        dataRef.orderByChild("createtime").limitToFirst(queryCount).on("child_added", function(snapshot){
+          // console.log(snapshot.key);
+          title = snapshot.val().title;
+          writer = snapshot.val().name;
+          console.log(snapshot.val().title, snapshot.val().name);
+          
+          var addContentFormat = `<a href="content.html#`+ title  + ":search" +`" class="list-group-item d-flex justify-content-between align-items-center">` + `<font color="black">`+title+`</font>` + `<small class="text-muted">`+writer +`</small>`+ `</a>`;
+          $('#newest_board').append(addContentFormat);
+        });
  
-        //메인화면 감사일기 쓰기버튼 눌렀을 때
+        
         $(document).on('click', '#text_btn', function () {
    
           //네비게이션 메뉴의 text값 가져오기 - 자바스크립트 dom 방식으로 가져왔다.
@@ -235,6 +229,10 @@
           } else {
             alert("로그인이 필요한 서비스 입니다.");
           }
+        });
+        
+        $(document).keyup(function(e){
+          if (e.keyCode == 13) searchResult();    
         });
 
         $(document).on('click','#search_btn',function(){
